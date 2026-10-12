@@ -45,6 +45,23 @@ package instead: `cd examples/basic && USE_DIST=1 bunx vite build`.
 Local tilesets go in `examples/basic/public/tiles/` (gitignored), for example
 a symlink to a project's data, then open `?tileset=/tiles/tileset.json`.
 
+## Releasing
+
+Publishing runs in GitHub Actions ([`publish.yml`](.github/workflows/publish.yml))
+with npm [trusted publishing](https://docs.npmjs.com/trusted-publishers): no
+npm token is stored anywhere, and npm attaches provenance to each release.
+
+1. Bump `version` in `packages/maplibre-3d-tiles-layer/package.json` and commit.
+2. Tag that commit with the same version and push both:
+
+   ```bash
+   git tag v0.1.1
+   git push origin main v0.1.1
+   ```
+
+The workflow refuses to publish if the tag and `package.json` version differ.
+Running it manually from the Actions tab does a dry run without publishing.
+
 ## License
 
 [MIT](LICENSE)

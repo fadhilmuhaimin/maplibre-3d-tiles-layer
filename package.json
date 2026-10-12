@@ -2,6 +2,7 @@
   "name": "maplibre-3d-tiles-layer-monorepo",
   "private": true,
   "type": "module",
+  "packageManager": "bun@1.2.19",
   "workspaces": [
     "packages/*",
     "examples/*"

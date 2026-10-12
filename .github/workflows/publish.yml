@@ -1,0 +1,65 @@
+name: Publish to npm
+
+# Releasing: bump "version" in packages/maplibre-3d-tiles-layer/package.json,
+# commit, then push a matching tag (e.g. v0.1.1). Publishing uses npm trusted
+# publishing (OIDC), so no npm token is stored in the repo, and npm attaches
+# provenance automatically.
+#
+# Running it manually from the Actions tab does a dry run: install, typecheck,
+# test, build and `npm publish --dry-run`, without publishing anything.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # OIDC token for npm trusted publishing
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/maplibre-3d-tiles-layer
+    steps:
+      - uses: actions/checkout@v7
+
+      # Bun version comes from "packageManager" in the root package.json.
+      - uses: oven-sh/setup-bun@v2
+
+      # Trusted publishing needs npm >= 11.5.1, which Node 24 bundles.
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - name: Install dependencies
+        working-directory: .
+        run: bun install --frozen-lockfile
+
+      - name: Check tag matches package version
+        if: github.ref_type == 'tag'
+        run: |
+          version="v$(node -p "require('./package.json').version")"
+          if [ "$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $version"
+            exit 1
+          fi
+
+      - run: bun run typecheck
+      - run: bun run test
+      - run: bun run build
+
+      - name: Publish
+        if: github.ref_type == 'tag'
+        run: npm publish
+
+      - name: Dry run
+        if: github.ref_type != 'tag'
+        run: npm publish --dry-run
