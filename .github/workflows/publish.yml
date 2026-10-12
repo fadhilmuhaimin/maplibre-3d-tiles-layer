@@ -6,7 +6,8 @@ name: Publish to npm
 # provenance automatically.
 #
 # Running it manually from the Actions tab does a dry run: install, typecheck,
-# test, build and `npm publish --dry-run`, without publishing anything.
+# test, build and `npm publish --dry-run` (or `npm pack --dry-run` when the
+# current version is already on npm), without publishing anything.
 on:
   push:
     tags: ['v*']
@@ -60,6 +61,16 @@ jobs:
         if: github.ref_type == 'tag'
         run: npm publish
 
+      # npm refuses even a dry run for a version that is already published, so
+      # between releases only the tarball contents can be checked.
       - name: Dry run
         if: github.ref_type != 'tag'
-        run: npm publish --dry-run
+        run: |
+          name="$(node -p "require('./package.json').name")"
+          version="$(node -p "require('./package.json').version")"
+          if [ -n "$(npm view "$name@$version" version 2>/dev/null)" ]; then
+            echo "::notice::$name@$version is already on npm; checking the tarball with npm pack instead."
+            npm pack --dry-run
+          else
+            npm publish --dry-run
+          fi
