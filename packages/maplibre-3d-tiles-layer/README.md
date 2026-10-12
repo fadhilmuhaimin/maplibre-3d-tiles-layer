@@ -46,6 +46,8 @@ and fixes problems that show up with real photogrammetry:
 
 ```bash
 npm install maplibre-3d-tiles-layer three 3d-tiles-renderer maplibre-gl
+# or
+bun add maplibre-3d-tiles-layer three 3d-tiles-renderer maplibre-gl
 ```
 
 Peer dependencies: `maplibre-gl` 5 or 6, `three` ≥ 0.167, `3d-tiles-renderer` ^0.5.3.
@@ -158,3 +160,7 @@ The projection math is exported and has no three.js dependency:
 `lngLatToEcef`, `ecefToLngLat`, `enuBasis`, `lngLatToMercator`,
 `mercatorUnitsPerMetre`, `ecefToMercatorMatrix`, `splitCameraRelative`.
 Matrices are column-major 16-element arrays.
+
+## License
+
+[MIT](LICENSE)

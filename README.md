@@ -1,8 +1,18 @@
 # maplibre-3d-tiles-layer
 
-Monorepo for [`maplibre-3d-tiles-layer`](packages/maplibre-3d-tiles-layer), a
-headless MapLibre custom layer for 3D Tiles photogrammetry, extracted from
-the `my-3d-geo-apps` project.
+A headless [MapLibre GL JS](https://maplibre.org/) custom layer that streams
+3D Tiles photogrammetry with three.js and
+[3d-tiles-renderer](https://github.com/NASA-AMMOS/3DTilesRendererJS).
+
+```bash
+npm install maplibre-3d-tiles-layer three 3d-tiles-renderer maplibre-gl
+# or
+bun add maplibre-3d-tiles-layer three 3d-tiles-renderer maplibre-gl
+```
+
+Usage, options and how it works: [package README](packages/maplibre-3d-tiles-layer/README.md).
+
+## Repository layout
 
 ```
 packages/maplibre-3d-tiles-layer   the library (tsup, vitest)
@@ -34,3 +44,7 @@ package instead: `cd examples/basic && USE_DIST=1 bunx vite build`.
 
 Local tilesets go in `examples/basic/public/tiles/` (gitignored), for example
 a symlink to a project's data, then open `?tileset=/tiles/tileset.json`.
+
+## License
+
+[MIT](LICENSE)
