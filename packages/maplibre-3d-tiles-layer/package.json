@@ -1,6 +1,6 @@
 {
   "name": "maplibre-3d-tiles-layer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Headless MapLibre GL JS custom layer that streams 3D Tiles (photogrammetry) with three.js and 3d-tiles-renderer.",
   "license": "MIT",
   "author": "fadhilmuhaimin (https://github.com/fadhilmuhaimin)",
