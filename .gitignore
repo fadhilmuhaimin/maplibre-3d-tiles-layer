@@ -1,0 +1,9 @@
+node_modules
+dist
+*.tsbuildinfo
+.DS_Store
+# Local tilesets for the example (often large or client-owned). Symlink or copy here.
+examples/*/public/tiles
+
+# Local Claude Code launch config
+.claude/

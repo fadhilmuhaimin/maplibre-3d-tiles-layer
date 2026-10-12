@@ -1,0 +1,52 @@
+{
+  "name": "maplibre-3d-tiles-layer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Headless MapLibre GL JS custom layer that streams 3D Tiles (photogrammetry) with three.js and 3d-tiles-renderer.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "sideEffects": false,
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "3d-tiles-renderer": "^0.5.3",
+    "maplibre-gl": ">=5.0.0 <7",
+    "three": ">=0.167.0"
+  },
+  "devDependencies": {
+    "3d-tiles-renderer": "^0.5.3",
+    "@types/three": "^0.186.0",
+    "maplibre-gl": "^5.24.0",
+    "three": "^0.186.1",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.3"
+  },
+  "keywords": [
+    "maplibre",
+    "maplibre-gl",
+    "3d-tiles",
+    "three",
+    "threejs",
+    "photogrammetry",
+    "b3dm",
+    "custom-layer"
+  ]
+}

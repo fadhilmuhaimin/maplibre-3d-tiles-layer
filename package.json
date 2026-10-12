@@ -1,0 +1,15 @@
+{
+  "name": "maplibre-3d-tiles-layer-monorepo",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "build": "bun run --filter maplibre-3d-tiles-layer build",
+    "test": "bun run --filter maplibre-3d-tiles-layer test",
+    "typecheck": "bun run --filter '*' typecheck",
+    "dev": "bun run --filter example-basic dev"
+  }
+}

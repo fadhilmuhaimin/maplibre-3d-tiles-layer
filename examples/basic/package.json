@@ -1,0 +1,21 @@
+{
+  "name": "example-basic",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "3d-tiles-renderer": "^0.5.3",
+    "maplibre-3d-tiles-layer": "workspace:*",
+    "maplibre-gl": "^6.14.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^8.3.4"
+  }
+}
